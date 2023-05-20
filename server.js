@@ -18,9 +18,14 @@ app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(__dirname + "/public/"));
 
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
+app.set('view engine','ejs'); 
+
+app.engine('ejs', require('ejs').__express);
+
 
 
 // home
