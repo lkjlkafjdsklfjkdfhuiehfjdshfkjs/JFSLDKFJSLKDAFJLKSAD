@@ -5,6 +5,7 @@ const auth = require("./middleware/auth");
 const jwt = require("jsonwebtoken");
 const cookieParser = require('cookie-parser');
 const Admin = require('./model/admin')
+let ejs = require('ejs');
 
 require("dotenv").config();
 require("./config/database").connect();
@@ -21,11 +22,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 // app.use(express.static("public"));
 app.use(express.static(__dirname + "/public/"));
 
-// app.set('view engine', 'ejs');
-app.set('view engine','ejs'); 
-
-app.engine('ejs', require('ejs').__express);
-
+app.set('view engine', 'ejs');
+// app.set('view engine', ejs);
 
 
 // home
@@ -155,10 +153,11 @@ app.post("/password", async(req,res)=>{
 
 // admin panel
 app.get("/admin", async (req, res) =>{
-    res.render("admin_login", {
+    res.render("admin_login.ejs", {
         response_: ""
     });
 });
+
 app.post("/admin", async (req, res)=>{
     try {
         //get user input
